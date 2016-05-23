@@ -1,4 +1,4 @@
-# node-redis-lua-hook
+# node-hook-redis-lua
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
@@ -11,7 +11,7 @@
 ## Install
 
 ```
-$ npm install --save redis-lua-hook
+$ npm install --save hook-redis-lua
 ```
 
 ## Usage
@@ -54,7 +54,7 @@ index.js:
 import Redis from 'ioredis';
 import fs from 'fs';
 import path from 'path';
-import { hook, unhook } from 'redis-lua-hook';
+import { hook, unhook } from 'hook-redis-lua';
 
 hook();
 const pdel = require('./pdel.lua');
@@ -100,17 +100,17 @@ npm test
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
-[build-badge]: https://img.shields.io/travis/perrin4869/node-redis-lua-hook/master.svg?style=flat-square
-[build]: https://travis-ci.org/perrin4869/node-redis-lua-hook
+[build-badge]: https://img.shields.io/travis/perrin4869/node-hook-redis-lua/master.svg?style=flat-square
+[build]: https://travis-ci.org/perrin4869/node-hook-redis-lua
 
-[npm-badge]: https://img.shields.io/npm/v/redis-lua-hook.svg?style=flat-square
-[npm]: https://www.npmjs.org/package/redis-lua-hook
+[npm-badge]: https://img.shields.io/npm/v/hook-redis-lua.svg?style=flat-square
+[npm]: https://www.npmjs.org/package/hook-redis-lua
 
-[coveralls-badge]: https://img.shields.io/coveralls/perrin4869/node-redis-lua-hook/master.svg?style=flat-square
-[coveralls]: https://coveralls.io/r/perrin4869/node-redis-lua-hook
+[coveralls-badge]: https://img.shields.io/coveralls/perrin4869/node-hook-redis-lua/master.svg?style=flat-square
+[coveralls]: https://coveralls.io/r/perrin4869/node-hook-redis-lua
 
-[dependency-status-badge]: https://david-dm.org/perrin4869/node-redis-lua-hook.svg?style=flat-square
-[dependency-status]: https://david-dm.org/perrin4869/node-redis-lua-hook
+[dependency-status-badge]: https://david-dm.org/perrin4869/node-hook-redis-lua.svg?style=flat-square
+[dependency-status]: https://david-dm.org/perrin4869/node-hook-redis-lua
 
-[dev-dependency-status-badge]: https://david-dm.org/perrin4869/node-redis-lua-hook/dev-status.svg?style=flat-square
-[dev-dependency-status]: https://david-dm.org/perrin4869/node-redis-lua-hook#info=devDependencies
+[dev-dependency-status-badge]: https://david-dm.org/perrin4869/node-hook-redis-lua/dev-status.svg?style=flat-square
+[dev-dependency-status]: https://david-dm.org/perrin4869/node-hook-redis-lua#info=devDependencies

@@ -2,7 +2,7 @@ import path from 'path';
 import { expect } from 'chai';
 import { hook, unhook } from '../src';
 
-describe('redis-lua-hook', () => {
+describe('hook-redis-lua', () => {
   afterEach(() => {
     unhook();
     delete require.cache[path.join(__dirname, 'test.lua')];

@@ -1,5 +1,5 @@
 {
-  "name": "redis-lua-hook",
+  "name": "hook-redis-lua",
   "version": "0.0.1",
   "description": "Hook for requiring lua scripts with redis-lua2js",
   "main": "lib/index.js",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/perrin4869/node-redis-lua-hook.git"
+    "url": "git+ssh://git@github.com/perrin4869/node-hook-redis-lua.git"
   },
   "keywords": [
     "redis",
@@ -25,9 +25,9 @@
   "author": "Julian Grinblat <julian@dotcore.co.il>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/perrin4869/node-redis-lua-hook/issues"
+    "url": "https://github.com/perrin4869/node-hook-redis-lua/issues"
   },
-  "homepage": "https://github.com/perrin4869/node-redis-lua-hook#readme",
+  "homepage": "https://github.com/perrin4869/node-hook-redis-lua#readme",
   "dependencies": {
     "node-hook": "^0.4.0",
     "redis-lua2js": "^1.0.0"
