@@ -30,7 +30,7 @@
   "homepage": "https://github.com/perrin4869/node-hook-redis-lua#readme",
   "dependencies": {
     "node-hook": "^0.4.0",
-    "redis-lua2js": "^1.0.0"
+    "redis-lua2js": "^1.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",

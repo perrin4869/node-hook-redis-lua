@@ -1,5 +1,5 @@
 import path from 'path';
-import { lua2js } from 'redis-lua2js';
+import lua2js from 'redis-lua2js';
 import { hook as _hook, unhook as _unhook } from 'node-hook';
 
 export function hook({ useFilenameAsName = true } = {}) {
