@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/perrin4869/node-hook-redis-lua#readme",
   "dependencies": {
-    "node-hook": "^0.4.0",
+    "node-hook": "^0.6.1",
     "redis-lua2js": "^1.1.0"
   },
   "devDependencies": {
@@ -38,14 +38,14 @@
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
     "eslint": "^3.0.1",
-    "eslint-config-airbnb-base": "^4.0.0",
-    "eslint-plugin-import": "^1.10.2",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
-    "gulp-mocha": "^2.2.0",
+    "gulp-mocha": "^4.3.1",
     "gulp-util": "^3.0.7",
     "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^2.5.3"
+    "mocha": "^3.4.1"
   }
 }
