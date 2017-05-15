@@ -1,5 +1,7 @@
 # node-hook-redis-lua
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/perrin4869/node-hook-redis-lua.svg)](https://greenkeeper.io/)
+
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
 [![Coverage Status][coveralls-badge]][coveralls]
