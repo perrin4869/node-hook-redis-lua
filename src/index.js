@@ -1,18 +1,16 @@
-import path from 'path';
-import lua2js from 'redis-lua2js';
-import { hook as _hook, unhook as _unhook } from 'node-hook';
+const lua2js = require('redis-lua2js');
+const { hook, unhook } = require('node-hook');
 
-export function hook({ useFilenameAsName = true } = {}) {
-  _hook('.lua', (source, filename) => {
-    const options = {};
-    if (useFilenameAsName) {
-      options.name = path.basename(filename, path.extname(filename));
-    }
+const normalize = (val) => (typeof val === 'function' ? val : (() => val));
 
-    return lua2js(source, options);
-  });
-}
+module.exports.hook = ({ name, numberOfKeys } = {}) => {
+  name = normalize(name); // eslint-disable-line no-param-reassign
+  numberOfKeys = normalize(numberOfKeys); // eslint-disable-line no-param-reassign
 
-export function unhook() {
-  _unhook('.lua');
-}
+  return hook('.lua', (source, filename) => lua2js(source, {
+    name: name(filename, source),
+    numberOfKeys: numberOfKeys(filename, source),
+  }));
+};
+
+module.exports.unhook = () => unhook('.lua');

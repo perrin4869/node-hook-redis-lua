@@ -1,24 +1,42 @@
-import path from 'path';
-import { expect } from 'chai';
-import { hook, unhook } from '../src';
+const { join, basename, extname } = require('path');
+const { expect } = require('chai');
+const { hook, unhook } = require('..');
+
+const stem = (filename) => basename(filename, extname(filename));
 
 describe('hook-redis-lua', () => {
   afterEach(() => {
     unhook();
-    delete require.cache[path.join(__dirname, 'test.lua')];
+    delete require.cache[join(__dirname, 'test.lua')];
   });
 
-  it('loads lua using filenames as names', () => {
+  it('loads lua with default name and numberOfKeys', () => {
     hook();
 
     const lua = require('./test.lua');
-    expect(lua.name).to.equal('test');
+    expect(lua.name).to.equal('pdel');
+    expect(lua.numberOfKeys).to.equal(1);
   });
 
-  it('loads lua without using filenames as names', () => {
-    hook({ useFilenameAsName: false });
+  it('loads lua using constant name and numberOfKeys', () => {
+    hook({
+      name: 'myname',
+      numberOfKeys: 2,
+    });
 
     const lua = require('./test.lua');
-    expect(lua.name).to.equal('pdel');
+    expect(lua.name).to.equal('myname');
+    expect(lua.numberOfKeys).to.equal(2);
+  });
+
+  it('loads lua using filenames as names', () => {
+    hook({
+      name: stem,
+      numberOfKeys: () => 3,
+    });
+
+    const lua = require('./test.lua');
+    expect(lua.name).to.equal('test');
+    expect(lua.numberOfKeys).to.equal(3);
   });
 });

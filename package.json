@@ -2,20 +2,21 @@
   "name": "hook-redis-lua",
   "version": "0.0.1",
   "description": "Hook for requiring lua scripts with redis-lua2js",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "gulp test",
-    "build": "gulp build",
-    "cover": "istanbul cover --report text --report html node_modules/mocha/bin/_mocha",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf ./coverage",
-    "prepublish": "npm run build"
+    "lint": "eslint 'src/*.js' 'test/*.js'",
+    "pretest": "npm run lint",
+    "test": "mocha",
+    "cover": "nyc npm test",
+    "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls",
+    "prepare": "npm test"
   },
   "files": [
-    "lib"
+    "src"
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/perrin4869/node-hook-redis-lua.git"
+    "url": "git+ssh://git@github.com/dotcore64/node-hook-redis-lua.git"
   },
   "keywords": [
     "redis",
@@ -25,27 +26,20 @@
   "author": "Julian Grinblat <julian@dotcore.co.il>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/perrin4869/node-hook-redis-lua/issues"
+    "url": "https://github.com/dotcore64/node-hook-redis-lua/issues"
   },
-  "homepage": "https://github.com/perrin4869/node-hook-redis-lua#readme",
+  "homepage": "https://github.com/dotcore64/node-hook-redis-lua#readme",
   "dependencies": {
-    "node-hook": "^0.4.0",
-    "redis-lua2js": "^1.1.0"
+    "node-hook": "^1.0.0",
+    "redis-lua2js": "^2.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.10.4",
-    "babel-preset-es2015": "^6.9.0",
-    "chai": "^3.5.0",
-    "coveralls": "^2.11.9",
-    "eslint": "^3.0.1",
-    "eslint-config-airbnb-base": "^4.0.0",
-    "eslint-plugin-import": "^1.10.2",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-eslint": "^3.0.1",
-    "gulp-mocha": "^2.2.0",
-    "gulp-util": "^3.0.7",
-    "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^2.5.3"
+    "chai": "^4.2.0",
+    "coveralls": "^3.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "mocha": "^7.1.2",
+    "nyc": "^15.0.1"
   }
 }

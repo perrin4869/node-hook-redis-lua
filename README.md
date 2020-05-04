@@ -51,15 +51,18 @@ end
 
 index.js:
 ```js
-import Redis from 'ioredis';
-import fs from 'fs';
-import path from 'path';
-import { hook, unhook } from 'hook-redis-lua';
+const Redis = require('ioredis');
+const fs = require('fs');
+const { hook, unhook } = require('hook-redis-lua');
 
-hook();
+hook(); // Uses default redis-lua2js behavior for parsing name and numberOfKeys out of lua comments
+
 const pdel = require('./pdel.lua');
 const ioredis = new Redis();
-pdel.install(ioredis); // accepts extra parameters: { name, numberOfKeys }
+ioredis.defineCommand(pdel.name, {
+  lua: pdel.lua,
+  numberOfKeys: pdel.numberOfKeys,
+});
 
 ioredis.pdel('*');
 
@@ -70,23 +73,37 @@ console.log(pdel.lua); // the content of pdel.lua
 unhook(); // can't require lua scripts from here
 ```
 
-Note: supports Node 4+
-
 ## API
 
-### hook({ useFilenameAsName })
+### hook({ name, numberOfKeys })
 
-Hooks `.lua` files to be parsed when called by `require` with [redis-lua2js](https://github.com/perrin4869/redis-lua2js)
+Hooks `.lua` files to be parsed when called by `require` with [redis-lua2js](https://github.com/dotcore64/redis-lua2js)
 
-#### useFilenameAsName
+#### name
 
-Type: `boolean`, default: `true`, whether or not use the `lua` script file basename as the name for the script, useful when installing into `ioredis`
+Type: `any | (filename: string, source: string) => any`, default: `undefined`
+
+How to determine the name of the lua script. If undefined, it will use the default `redis-lua2js` behavior of parsing lua comments for the name.
+If a constant is passed, it will use this constant for the name of all scripts.
+If a function is passed, it will be used to determine the name of the script. The function must be synchronous.
+
+Example: `(filename) => path.basename(filename, path.extname(filename))`
+
+#### numberOfKeys
+
+Type: `any | (filename: string, source: string) => any`, default: `undefined`
+
+How to determine the number of keys of the lua script. If undefined, it will use the default `redis-lua2js` behavior of parsing lua comments for the number of keys.
+If a constant is passed, it will use this constant for the number of keys of all scripts.
+If a function is passed, it will be used to determine the number of keys of the script. The function must be synchronous.
+
+Example: `(filename, source) => getNumberOfKeysSomehow(source)`
 
 ### unhook()
 
 Removes `.lua` hooks from `require`
 
-For details on the properties exported by the hook, check [redis-lua2js](https://github.com/perrin4869/redis-lua2js).
+For details on the properties exported by the hook, check [redis-lua2js](https://github.com/dotcore64/redis-lua2js).
 
 ####
 
@@ -100,17 +117,17 @@ npm test
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
-[build-badge]: https://img.shields.io/travis/perrin4869/node-hook-redis-lua/master.svg?style=flat-square
-[build]: https://travis-ci.org/perrin4869/node-hook-redis-lua
+[build-badge]: https://img.shields.io/travis/dotcore64/node-hook-redis-lua/master.svg?style=flat-square
+[build]: https://travis-ci.org/dotcore64/node-hook-redis-lua
 
 [npm-badge]: https://img.shields.io/npm/v/hook-redis-lua.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/hook-redis-lua
 
-[coveralls-badge]: https://img.shields.io/coveralls/perrin4869/node-hook-redis-lua/master.svg?style=flat-square
-[coveralls]: https://coveralls.io/r/perrin4869/node-hook-redis-lua
+[coveralls-badge]: https://img.shields.io/coveralls/dotcore64/node-hook-redis-lua/master.svg?style=flat-square
+[coveralls]: https://coveralls.io/r/dotcore64/node-hook-redis-lua
 
-[dependency-status-badge]: https://david-dm.org/perrin4869/node-hook-redis-lua.svg?style=flat-square
-[dependency-status]: https://david-dm.org/perrin4869/node-hook-redis-lua
+[dependency-status-badge]: https://david-dm.org/dotcore64/node-hook-redis-lua.svg?style=flat-square
+[dependency-status]: https://david-dm.org/dotcore64/node-hook-redis-lua
 
-[dev-dependency-status-badge]: https://david-dm.org/perrin4869/node-hook-redis-lua/dev-status.svg?style=flat-square
-[dev-dependency-status]: https://david-dm.org/perrin4869/node-hook-redis-lua#info=devDependencies
+[dev-dependency-status-badge]: https://david-dm.org/dotcore64/node-hook-redis-lua/dev-status.svg?style=flat-square
+[dev-dependency-status]: https://david-dm.org/dotcore64/node-hook-redis-lua#info=devDependencies
