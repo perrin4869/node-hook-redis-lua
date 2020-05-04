@@ -1,6 +1,6 @@
 {
   "name": "hook-redis-lua",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Hook for requiring lua scripts with redis-lua2js",
   "main": "src/index.js",
   "scripts": {
